@@ -122,5 +122,10 @@
       }
     }
   },
-  "defaultProject": "ng-swipe-to-delete"
+  "defaultProject": "ng-swipe-to-delete",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

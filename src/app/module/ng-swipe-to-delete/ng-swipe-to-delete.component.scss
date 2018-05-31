@@ -1,0 +1,25 @@
+.ngstd-delete-indicator {
+  height: 97%;
+  width: 100%;
+  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+}
+
+.ngstd-delete-icon {
+  margin-left: 16px;
+  margin-right: 16px;
+  font-size: 30px !important;
+  line-height: 72px !important;
+}
+
+.ngstd-item-container {
+  padding: 0 16px !important;
+  background-color: #fff;
+  width: 100%;
+}
+
+.ngstd-details {
+  padding-left: 16px !important;
+}

@@ -1,0 +1,29 @@
+<div class="ngstd-main-canvas">
+  <mat-list [@listAnimation]="items.length">
+    <mat-list-item class="ngstd-list-item" *ngFor="let item of items;let i = index">
+      
+      <div class="ngstd-delete-indicator">
+        <i class="material-icons ngstd-delete-icon">delete_sweep</i>
+        <i class="material-icons ngstd-delete-icon">delete_sweep</i>
+      </div>
+
+      <div #elementRefrence class="mat-list-item-content ngstd-item-container "
+        (panend)="panend($event,i, elementRefrence)" 
+        (panmove)="panmove($event,i,elementRefrence)" 
+        [@slideLeft]="ngstdIndexNumber === i"
+        (@slideLeft.done)=alignComplete($event)
+      >
+        <img matListAvatar src="{{item.img}}" alt="{{item.title}}">
+        <div class="mat-list-text ngstd-details">
+          <h3 matLine> {{item.title}} </h3>
+          <p matLine>
+            <span> {{item.title}} </span>
+            <span class="demo-2"> -- {{item.title}} </span>
+          </p>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</div>
+

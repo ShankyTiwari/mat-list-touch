@@ -4,7 +4,7 @@ Material Swipe to delete list for Angular Projects.
 
 ## Why ng-swipe-to-delete?
 
-This module provides *Four* types of the listviews, so no need to write code for the listview again and again. With the help of this module, you can easily integrate list view having *Swipe to delete feature*. This module should work with all kind of screens width.
+This module provides **Four** types of the listviews, so no need to write code for the listview again and again. With the help of this module, you can easily integrate list view having **Swipe to delete feature**. This module should work with all kind of screens width.
 
 ## Demo
 
@@ -152,8 +152,8 @@ Make sure, your structure of array should look like array shown below,
 ## API
 Using ```configuration```, different listview can be rendered. Although ```configuration``` is optional, but then you will get simple list.
 To render Listview with icons or Listview with Avatars use the below options.
-* ```slideThreshold: number``` => This is a percentage width. Once you side more than a specified percentage(```slideThreshold```)  the list item will be removed. Basically, this will determine at what point the list item should be removed. If no value/Inavlid valid is given then it will consider the default value i.e. 12%.
-* ```listType: string;``` => What type of list should be rendered. There are four option listed below. If you give any other input apart from these value, it will render the simple list view.
+* ```slideThreshold: number``` => This is a percentage width. Once you slide more than a specified percentage(```slideThreshold```)  the list item will be removed. Basically, this will determine at what point the list item should be removed. If no value/Inavlid valid is given then it will consider the default value i.e. 12%.
+* ```listType: string;``` => What type of list should be rendered. There are four option listed below. If you give any other input apart from below listed values, it will render the simple list view.
     1. singleline
     2. multiline
     3. listwithicon
@@ -161,7 +161,7 @@ To render Listview with icons or Listview with Avatars use the below options.
 
 * ```classname: string;``` => *[optional]* You can give your own custom class name in order to modify the list appearance. 
 * ```disableWarnings: boolean;``` => *[optional]* To suppress the warnings in console.
-* ```numberOfDeleteIcon: number;``` => *[optional]* It expects only two values either *1* or *2*. It is used to hide the sweep delete icon on the right side of list item
+* ```numberOfDeleteIcon: number;``` => *[optional]* It expects only two values either **1** or **2**. It is used to hide the sweep delete icon on the right side of list item.
 
         
 ## Dependencies

@@ -170,7 +170,7 @@ To render Listview with icons or Listview with Avatars use the below options.
 
 ## Contribution
 
-I welcome you to fork and add more features into it. If you have any bugs or feature request, please create an issue at [github repository](https://github.com/ShankyTiwari/ng-material-multilevel-menu/issues).
+I welcome you to fork and add more features into it. If you have any bugs or feature request, please create an issue at [github repository](https://github.com/ShankyTiwari/ng-swipe-to-delete/issues).
 
 ## Leicense
 

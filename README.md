@@ -167,6 +167,7 @@ To render Listview with icons or Listview with Avatars use the below options.
 ## Dependencies
 1. [Material Icons](https://material.io/tools/icons/?style=baseline)
 2. [Angular Material](https://material.angular.io)
+3. [HammerJs](https://hammerjs.github.io/)
 
 ## Contribution
 

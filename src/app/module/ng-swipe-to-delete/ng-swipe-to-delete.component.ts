@@ -1,6 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { trigger, style, state, keyframes, transition, animate, query, stagger } from '@angular/animations';
+import { trigger, style, keyframes, transition, animate, query, stagger } from '@angular/animations';
 
+import { Configuration } from './interfaces/configuration';
+import { ListType } from './enums/list-type';
+import { Warnings } from './enums/warnings';
+import { Constants } from './constants/constants';
 
 @Component({
   selector: 'ng-swipe-to-delete',
@@ -29,37 +33,121 @@ import { trigger, style, state, keyframes, transition, animate, query, stagger }
 
 export class NgSwipeToDeleteComponent implements OnInit {
   @Input() items: any;
+  @Input() configuration: Configuration = null;
   @Output() deletedItem = new EventEmitter<any>();
-  ngstdIndexNumber = null;
-  slideThresold = 7;
+  private ngstdIndexNumber:number = null;
+  private disableWarnings = false;
+  private listType: string = null;
+  private slideThreshold: number;
+  private numberOfDeleteIcon: number = null;
+  private classname: string =  null;
+  private isInvalidConfig: boolean =  null;
   constructor() { }
-  ngOnInit() { }
-  panend(action, index, elementRefrence) {
+  ngOnInit() {
+    this.initializeSWipeList();
+  }
+  initializeSWipeList(): void {
+    this.detectInvalidConfig();
+    this.setDisableWarnings();
+    this.setslideThreshold();
+    this.setNumberOfDeleteIcon();
+    this.setlistType();
+  }
+  detectInvalidConfig(): void {
+    if (this.configuration === null || this.configuration === undefined || this.configuration === '') {
+      this.isInvalidConfig = true;
+      this.logWarnings(Warnings.CONFIG_NOT_LOADED);
+    } else {
+      this.isInvalidConfig = false;
+    }
+  }
+  setNumberOfDeleteIcon(): void {
+    const config = this.configuration;
+    if (this.isInvalidConfig || config.numberOfDeleteIcon === 2) {
+      this.numberOfDeleteIcon = Constants.NUMBER_OF_DELETE_ICONS;
+    } else{
+      this.numberOfDeleteIcon = null;
+    }
+  }
+  setslideThreshold(): void {
+    const config = this.configuration;
+    if (this.isInvalidConfig || config.slideThreshold === null || config.slideThreshold === undefined || typeof config.slideThreshold !== 'number') {
+      if (typeof config.slideThreshold !== 'number') {
+        this.logWarnings(Warnings.INVALID_SLIDE_THRESHOLD_NOT_ALLOWED, `${Constants.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_SLIDE_THRESHOLD}%.`);
+      } else {
+        this.logWarnings(Warnings.SLIDE_THRESHOLD_NOT_FOUND, `${Constants.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_SLIDE_THRESHOLD}%.`);
+      }
+      this.slideThreshold = 10;
+    } else {
+      if (config.slideThreshold < 0 || config.slideThreshold === 0 || config.slideThreshold > 50) {
+        if (config.slideThreshold > 50) {
+          this.logWarnings(Warnings.MAX_SLIDE_THRESHOLD_NOT_ALLOWED, `${Constants.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_SLIDE_THRESHOLD}%.`);
+        }
+        if (config.slideThreshold < 0 || config.slideThreshold === 0) {
+          this.logWarnings(Warnings.ZERO_SLIDE_THRESHOLD_NOT_ALLOWED, `${Constants.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_SLIDE_THRESHOLD}%.`);
+        }
+        this.slideThreshold = Constants.DEFAULT_SLIDE_THRESHOLD;
+      } else {
+        this.slideThreshold = config.slideThreshold;
+      }
+    }
+  }
+  setlistType(): void {
+    const config = this.configuration;
+    if (this.isInvalidConfig || config.listType === `` || config.listType === undefined || config.listType === null) {
+      this.listType = ListType.SINGLELINE;
+    } else {
+      const listType = config.listType.trim();
+      switch (listType) {
+        case ListType.SINGLELINE:
+        case ListType.MULTILINE:
+        case ListType.LISTWITHICON:
+        case ListType.LISTWITHIMAGE:
+        case ListType.LISTWITHDESCRIPTION:
+          this.listType = listType;
+          break;
+        default:
+          this.listType = ListType.SINGLELINE;
+      }
+    }
+  }
+  setDisableWarnings(): void {
+    const config = this.configuration;
+    this.disableWarnings = (config.disableWarnings && config.disableWarnings !== undefined && config.disableWarnings !== null) ? true : false;
+  }
+  getClassName(): string{
+    if (this.isInvalidConfig) {
+      return `${Constants.DEFAULT_CLASS_NAME}`;
+    } else {
+      if (this.configuration.classname !== '' && this.configuration.classname !== null && this.configuration.classname !== undefined ){
+        return `${Constants.DEFAULT_CLASS_NAME} ${this.configuration.classname}`;
+      } else {
+        return `${Constants.DEFAULT_CLASS_NAME}`;
+      }
+    }
+  }
+  panend(action, index, elementRefrence): void {
     const currentMargin = this.getLeftPosition(elementRefrence);
-    if (currentMargin > this.slideThresold || currentMargin < - this.slideThresold) {
+    if (currentMargin > this.slideThreshold || 
+        (currentMargin < - this.slideThreshold &&  this.numberOfDeleteIcon === Constants.NUMBER_OF_DELETE_ICONS)) {
       this.removeElement(index);
     } else {
       this.ngstdIndexNumber = index;
     }
   }
-
-  panmove(action, index, elementRefrence) {
+  panmove(action, index, elementRefrence): void {
     elementRefrence.style.left = action.deltaX + 'px';
   }
-
-  alignComplete(event) {
+  alignComplete(event): void {
     event.element.style.left = '0px';
     this.ngstdIndexNumber = null;
   }
-
-  removeElement(index) {
+  removeElement(index): void {
     const deletedItem = this.items[index];
     this.items.splice(index, 1);
     this.deletedItem.emit(deletedItem);
   }
-
-  getLeftPosition(elementRefrence) {
-    console.log(elementRefrence.style.left);
+  getLeftPosition(elementRefrence): number {
     const currentleftPosition = elementRefrence.style.left.slice(0, -2);
     if (currentleftPosition !== null) {
       return (parseInt(
@@ -68,5 +156,24 @@ export class NgSwipeToDeleteComponent implements OnInit {
     } else {
       return 0;
     }
+  }
+  logWarnings(warningFor: string, extraMessage: any = null): void {
+    if (this.disableWarnings) {
+      return;
+    }
+    switch (warningFor) {
+      case Warnings.CONFIG_NOT_LOADED:
+      case Warnings.SLIDE_THRESHOLD_NOT_FOUND:
+      case Warnings.ZERO_SLIDE_THRESHOLD_NOT_ALLOWED:
+      case Warnings.MAX_SLIDE_THRESHOLD_NOT_ALLOWED:
+      case Warnings.INVALID_SLIDE_THRESHOLD_NOT_ALLOWED:
+        extraMessage === null ? console.warn(this.getConstValue(warningFor)) : console.warn(this.getConstValue(warningFor), extraMessage);
+        break;
+      default:
+        // unicons !
+    }
+  }
+  getConstValue(constantName: string): string {
+    return Constants[constantName];
   }
 }

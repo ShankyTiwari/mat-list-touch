@@ -12,16 +12,7 @@ Check the Material Multi-Level Menu in action, [click here](http://plugins.coder
 
 ## Installation
 You can use either the npm or yarn command-line tool to install packages. Use whichever is appropriate for your project in the examples below.
-
-#### NPM
-```  
-npm install --save ng-material-multilevel-menu
-```
-        
-#### YARN
-```          
-yarn add --save ng-material-multilevel-menu
-```
+Not yet published.
         
 ## Usage
 Follow below steps to add multi level list in your project

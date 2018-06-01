@@ -8,7 +8,7 @@ This module provides **Four** types of the listviews, so no need to write code f
 
 ## Demo
 
-Check the Material Multi-Level Menu in action, [click here](http://plugins.codershood.info/).
+Check the Material Swipe to delete list in action, [click here](http://plugins.codershood.info/).
 
 ## Installation
 You can use either the npm or yarn command-line tool to install packages. Use whichever is appropriate for your project in the examples below.

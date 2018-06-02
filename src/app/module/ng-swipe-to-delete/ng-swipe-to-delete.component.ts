@@ -35,13 +35,13 @@ export class NgSwipeToDeleteComponent implements OnInit {
   @Input() items: any;
   @Input() configuration: Configuration = null;
   @Output() deletedItem = new EventEmitter<any>();
-  private ngstdIndexNumber:number = null;
-  private disableWarnings = false;
-  private listType: string = null;
-  private slideThreshold: number;
-  private numberOfDeleteIcon: number = null;
-  private classname: string =  null;
-  private isInvalidConfig: boolean =  null;
+  ngstdIndexNumber:number = null;
+  disableWarnings = false;
+  listType: string = null;
+  slideThreshold: number;
+  numberOfDeleteIcon: number = null;
+  classname: string =  null;
+  isInvalidConfig: boolean =  null;
   constructor() { }
   ngOnInit() {
     this.initializeSWipeList();
@@ -103,7 +103,6 @@ export class NgSwipeToDeleteComponent implements OnInit {
         case ListType.MULTILINE:
         case ListType.LISTWITHICON:
         case ListType.LISTWITHIMAGE:
-        case ListType.LISTWITHDESCRIPTION:
           this.listType = listType;
           break;
         default:

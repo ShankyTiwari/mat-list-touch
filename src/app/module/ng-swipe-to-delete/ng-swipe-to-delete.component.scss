@@ -1,5 +1,9 @@
 .ngstd-main-canvas{
   overflow-x: hidden;
+  /deep/
+  mat-list-item .mat-list-item-content {
+    padding: 0 !important;
+  }
   .ngstd-delete-indicator {
     height: 97%;
     width: 100%;
@@ -15,6 +19,7 @@
       width: 24px;
       height: 24px;
       font-size: 24px;
+      color: #fff;
     }
   }
   .ngstd-item-container {

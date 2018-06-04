@@ -93,7 +93,7 @@ export class AppComponent {
       }
     }
   ];
-  config = {
+  config2 = {
     listType: 'listwithimage',
     slideThreshold : 12,
     numberOfDeleteIcon : 1,

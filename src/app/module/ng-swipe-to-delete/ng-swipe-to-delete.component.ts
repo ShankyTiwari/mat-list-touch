@@ -70,20 +70,25 @@ export class NgSwipeToDeleteComponent implements OnInit {
     }
   }
   setslideThreshold(): void {
+    if (this.isInvalidConfig) {
+      this.slideThreshold = Constants.DEFAULT_SLIDE_THRESHOLD;
+      this.logWarnings(Warnings.SLIDE_THRESHOLD_NOT_FOUND, `${Constants.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_SLIDE_THRESHOLD}%.`);
+      return;
+    }
     const config = this.configuration;
-    if (this.isInvalidConfig || config.slideThreshold === null || config.slideThreshold === undefined || typeof config.slideThreshold !== 'number') {
+    if (config.slideThreshold === null || config.slideThreshold === undefined || typeof config.slideThreshold !== 'number') {
       if (typeof config.slideThreshold !== 'number') {
         this.logWarnings(Warnings.INVALID_SLIDE_THRESHOLD_NOT_ALLOWED, `${Constants.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_SLIDE_THRESHOLD}%.`);
       } else {
         this.logWarnings(Warnings.SLIDE_THRESHOLD_NOT_FOUND, `${Constants.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_SLIDE_THRESHOLD}%.`);
       }
-      this.slideThreshold = 10;
+      this.slideThreshold = Constants.DEFAULT_SLIDE_THRESHOLD;
     } else {
-      if (config.slideThreshold < 0 || config.slideThreshold === 0 || config.slideThreshold > 50) {
-        if (config.slideThreshold > 50) {
+      if (config.slideThreshold < Constants.MIN_SLIDE_THRESHOLD || config.slideThreshold === Constants.MIN_SLIDE_THRESHOLD || config.slideThreshold > Constants.MAX_SLIDE_THRESHOLD) {
+        if (config.slideThreshold > Constants.MAX_SLIDE_THRESHOLD) {
           this.logWarnings(Warnings.MAX_SLIDE_THRESHOLD_NOT_ALLOWED, `${Constants.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_SLIDE_THRESHOLD}%.`);
         }
-        if (config.slideThreshold < 0 || config.slideThreshold === 0) {
+        if (config.slideThreshold < Constants.MIN_SLIDE_THRESHOLD || config.slideThreshold === Constants.MIN_SLIDE_THRESHOLD) {
           this.logWarnings(Warnings.ZERO_SLIDE_THRESHOLD_NOT_ALLOWED, `${Constants.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_SLIDE_THRESHOLD}%.`);
         }
         this.slideThreshold = Constants.DEFAULT_SLIDE_THRESHOLD;
@@ -111,8 +116,12 @@ export class NgSwipeToDeleteComponent implements OnInit {
     }
   }
   setDisableWarnings(): void {
-    const config = this.configuration;
-    this.disableWarnings = (config.disableWarnings && config.disableWarnings !== undefined && config.disableWarnings !== null) ? true : false;
+    if (this.isInvalidConfig) {
+      this.disableWarnings = false;
+    } else {
+      const config = this.configuration;
+      this.disableWarnings = (config.disableWarnings && config.disableWarnings !== undefined && config.disableWarnings !== null) ? true : false;
+    }
   }
   getClassName(): string{
     if (this.isInvalidConfig) {

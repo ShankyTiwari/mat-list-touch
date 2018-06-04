@@ -143,7 +143,7 @@ export class NgSwipeToDeleteComponent implements OnInit {
       this.ngstdIndexNumber = index;
     }
   }
-  panmove(action, index, elementRefrence): void {
+  panmove(action, elementRefrence): void {
     elementRefrence.style.left = action.deltaX + 'px';
   }
   alignComplete(event): void {

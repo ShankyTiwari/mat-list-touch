@@ -9,7 +9,7 @@
 
       <div #elementRefrence class="ngstd-item-container "
         (panend)="panend($event,i, elementRefrence)" 
-        (panmove)="panmove($event,i,elementRefrence)" 
+        (panmove)="panmove($event,elementRefrence)" 
         [@slideLeft]="ngstdIndexNumber === i"
         (@slideLeft.done)=alignComplete($event)
       >

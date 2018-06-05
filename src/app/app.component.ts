@@ -91,12 +91,36 @@ export class AppComponent {
           'Attractive male', 'Healing', 'Will power-based constructs', 'Flying'
         ]
       }
+    },
+    {
+      title: 'The Black Panther',
+      icon: `send`,
+      img: `/assets/blackpanther.jpg`,
+      description: `Black Panther's real name is T'Challa, king and protector of the fictional African nation of Wakanda.`,
+      data: {
+        name: `King T'Challa`,
+        abilities: [
+          'Superhumanly acute senses', 'Enhanced strength', 'Speed', 'Agility', 'Stamina', 'Durability', 'Healing', 'Reflexes'
+        ]
+      }
+    },
+    {
+      title: 'The Hulk',
+      icon: `send`,
+      img: `/assets/thehulk.jpg`,
+      description: `Hulk, a green-skinned, hulking and muscular humanoid possessing a vast degree of physical strength, and his alter ego Bruce Banner.`,
+      data: {
+        name: `Bruce Banner`,
+        abilities: [
+          'Limitless physical strength'
+        ]
+      }
     }
   ];
   config = {
     listType: 'listwithimage',
     slideThreshold : 12,
-    numberOfDeleteIcon : 1,
+    numberOfDeleteIcon : 2,
     disableWarnings: false,
     classname : 'my-custom-class'
   }

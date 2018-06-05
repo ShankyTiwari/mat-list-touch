@@ -3,12 +3,13 @@
     <mat-list-item class="ngstd-list-item" *ngFor="let item of items;let i = index">
       
       <div class="ngstd-delete-indicator">
-        <i class="material-icons ngstd-delete-icon">delete_sweep</i>
-        <i class="material-icons ngstd-delete-icon" *ngIf="numberOfDeleteIcon === 2">delete_sweep</i>
+        <i class="material-icons ngstd-delete-icon" *ngIf="getLeftSign()">delete_sweep</i>
+        <span>&nbsp;</span>
+        <i class="material-icons ngstd-delete-icon" *ngIf="numberOfDeleteIcon === 2 && !getLeftSign()">delete_sweep</i>
       </div>
 
       <div #elementRefrence class="ngstd-item-container "
-        (panend)="panend($event,i, elementRefrence)" 
+        (panend)="panend($event, i, elementRefrence)" 
         (panmove)="panmove($event,elementRefrence)" 
         [@slideLeft]="ngstdIndexNumber === i"
         (@slideLeft.done)=alignComplete($event)
@@ -16,7 +17,7 @@
         <ng-container *ngIf="listType === 'listwithimage'">
           <img matListAvatar src="{{item.img}}" alt="{{item.title}}">
           <div class="mat-list-text ngstd-details">
-            <h3 matLine> {{item.title}} </h3>
+            <h3 matLine> {{item.title}}</h3>
             <p matLine>
               <span> {{item.description}} </span>
             </p>

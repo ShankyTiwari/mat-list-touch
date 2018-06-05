@@ -5,13 +5,14 @@
   }
   .ngstd-delete-indicator {
     height: 97%;
-    width: 100%;
+    width: 98%;
     background-color: red;
     display: flex;
     justify-content: space-between;
     position: absolute;
     align-items: center;
     flex-shrink: 0;
+    margin-left: 0.5%;
     .ngstd-delete-icon {
       margin-left: 16px;
       margin-right: 16px;

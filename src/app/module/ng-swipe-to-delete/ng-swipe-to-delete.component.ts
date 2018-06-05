@@ -42,6 +42,7 @@ export class NgSwipeToDeleteComponent implements OnInit {
   numberOfDeleteIcon: number = null;
   classname: string =  null;
   isInvalidConfig: boolean =  null;
+  elementLeftSign = true;
   constructor() { }
   ngOnInit() {
     this.initializeSWipeList();
@@ -145,10 +146,15 @@ export class NgSwipeToDeleteComponent implements OnInit {
   }
   panmove(action, elementRefrence): void {
     elementRefrence.style.left = action.deltaX + 'px';
+    elementRefrence.offsetLeft > 0 ? this.elementLeftSign = true : this.elementLeftSign = false;
   }
   alignComplete(event): void {
     event.element.style.left = '0px';
+    event.element.offsetLeft > 0 ? this.elementLeftSign = true : this.elementLeftSign = false;
     this.ngstdIndexNumber = null;
+  }
+  getLeftSign() {
+    return this.elementLeftSign ?  true : false;
   }
   removeElement(index): void {
     const deletedItem = this.items[index];

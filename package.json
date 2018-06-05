@@ -1,6 +1,6 @@
 {
   "name": "ng-swipe-to-delete",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,6 +11,25 @@
     "packagr": "ng-packagr -p ng-package.json"
   },
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShankyTiwari/ng-swipe-to-delete.git"
+  },
+  "keywords": [
+    "Angular2",
+    "Angular4",
+    "Angular6",
+    "Angular",
+    "swipe-to-delete",
+    "swipe-and-delete",
+    "angular-swipe-to-delete",
+    "angular-swipe-and-delete"
+  ],
+  "author": "Shashank Tiwari <shashank@codershood.info>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShankyTiwari/ng-swipe-to-delete/issues"
+  },
   "dependencies": {
     "@angular/animations": "^6.0.3",
     "@angular/cdk": "^6.2.0",

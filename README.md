@@ -13,9 +13,6 @@ Check the Material Swipe to delete list in action, [click here](http://plugins.c
 ## Installation
 You can use either the npm or yarn command-line tool to install packages. Use whichever is appropriate for your project in the examples below.
 
-## Installation
-You can use either the npm or yarn command-line tool to install packages. Use whichever is appropriate for your project in the examples below.
-
 #### NPM
 ```  
 npm install --save ng-swipe-to-delete

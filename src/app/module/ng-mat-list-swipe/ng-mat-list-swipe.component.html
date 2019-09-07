@@ -1,38 +1,39 @@
 <mat-list *ngIf="dataSource" [@listAnimation]="dataSource?.length" class="list-canvas">
     <mat-list-item *ngFor="let item of dataSource; let i = index">
-        <div class="slide-action-indicator">
-            <i class="material-icons slide-action-icon">delete_sweep</i>
+        <div class="slide-action-indicator" [ngStyle]="{'background-color': currentSwipeColor}">
+            <i class="material-icons slide-action-icon" *ngIf="swipeLeftAction.observers">{{leftIcon}}</i>
             <span>&nbsp;</span>
-            <!--                <i *ngIf="numberOfDeleteIcon === 2 && !getLeftSign()" class="material-icons ngstd-delete-icon">delete_sweep</i>-->
+            <i class="material-icons slide-action-icon" *ngIf="swipeRightAction.observers">{{rightIcon}}</i>
         </div>
 
         <div #element (@slideRow.done)=slideComplete($event)
              (panend)="panEndEvent($event, i, element)"
-             (panmove)="panMoveEvent($event,element)"
-             [@slideRow]="ngstdIndexNumber === i"
+             (panmove)="panMoveEvent($event, element)"
+             (tap)="tapEvent(i)"
+             [@slideRow]="lastAnimatedIndex === i"
              class="list-item-container">
-            <ng-container *ngIf="listType === EnumListType.LISTWITHIMAGE">
-                <img alt="{{item.title}}" matListAvatar src="{{item.img}}">
+            <ng-container *ngIf="multiLine && avatar">
+                <img alt="{{item.title}}" matListAvatar src="{{item.img ? item.img : ''}}">
                 <div class="mat-list-text list-item-details">
-                    <h3 matLine> {{item.title}}</h3>
+                    <strong matLine> {{item.title}}</strong>
                     <p matLine>
                         <span> {{item.description}} </span>
                     </p>
                 </div>
             </ng-container>
-            <ng-container *ngIf="listType === EnumListType.LISTWITHICON">
-                <mat-icon class="list-item-icon" mat-list-icon>{{item.icon}}</mat-icon>
+            <ng-container *ngIf="multiLine && !avatar && icon">
+                <mat-icon class="list-item-icon" mat-list-icon>{{item.icon ? item.icon : 'help_outline'}}</mat-icon>
                 <div class="mat-list-text list-item-details">
-                    <h4 mat-line>{{item.title}}</h4>
+                    <strong>{{item.title}}</strong>
                     <p mat-line> {{item.description}} </p>
                 </div>
             </ng-container>
-            <ng-container *ngIf="listType === EnumListType.SINGLELINE">
+            <ng-container *ngIf="!multiLine">
                 <mat-list-item> {{item.title}} </mat-list-item>
             </ng-container>
-            <ng-container *ngIf="listType === EnumListType.MULTILINE">
+            <ng-container *ngIf="multiLine && !avatar && !icon">
                 <div class="mat-list-text list-item-details">
-                    <h3 matLine> {{item.title}} </h3>
+                    <strong matLine> {{item.title}} </strong>
                     <p matLine>
                         <span> {{item.description}} </span>
                         <span class="demo-2"> -- {{item.description}} </span>

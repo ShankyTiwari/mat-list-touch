@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {animate, keyframes, query, stagger, style, transition, trigger} from '@angular/animations';
-import {Warnings} from './enums/warnings';
-import {Constants} from './constants/constants';
-import {ListType} from "./enums/list-type";
+import {Constants, Warnings} from './utils/constants';
+import {IListDataSource} from "./utils/list-data-source.model";
 
 @Component({
     selector: 'ng-mat-list-swipe',
@@ -30,22 +29,31 @@ import {ListType} from "./enums/list-type";
 })
 export class NgMatListSwipeComponent implements OnInit {
     @Input() swipeThreshold?: number = Constants.DEFAULT_THRESHOLD;
-    @Input() listType?: ListType = ListType.SINGLELINE;
-    @Input() leftColor?: string;
-    @Input() rightColor?: string;
+    @Input() swipeLimit?: number = 150;
+    @Input() multiLine?: boolean = true;
+    @Input() icon?: boolean = false;
+    @Input() avatar?: boolean = false;
+    @Input() leftColor?: string = 'green';
+    @Input() leftIcon?: string = 'check';
+    @Input() leftBorder?: string;
+    @Input() rightColor?: string = 'red';
+    @Input() rightIcon?: string = 'not_interested';
+    @Input() rightBorder?: string;
+    @Input() defaultSwipeColor?: string = 'gray';
+    currentSwipeColor = this.defaultSwipeColor;
 
     @Input() silenceWarnings?: boolean = false;
 
-    @Input() dataSource: any;
+    @Input() dataSource: IListDataSource<any>[];
     @Output() swipeLeftAction = new EventEmitter<any>();
     @Output() swipeRightAction = new EventEmitter<any>();
     @Output() tapAction = new EventEmitter<any>();
 
-    ngstdIndexNumber: number = null;
-    EnumListType = ListType;
+    lastAnimatedIndex: number = null;
 
     ngOnInit() {
         this.resetSwipeList();
+        console.log(this.dataSource);
     }
 
     resetSwipeList(): void {
@@ -62,61 +70,84 @@ export class NgMatListSwipeComponent implements OnInit {
             }
             this.swipeThreshold = Constants.DEFAULT_THRESHOLD;
         }
+        if (this.swipeLimit < this.swipeThreshold) {
+            this.swipeLimit = 100 - this.swipeThreshold;
+            this.logWarnings(Warnings.LIMIT_TOO_LOW);
+        }
 
     }
 
     panMoveEvent(action, elementRef): void {
-        elementRef.style.left = action.deltaX + 'px';
-        // elementRef.offsetLeft > 0 ? this.elementLeftSign = true : this.elementLeftSign = false;
+        const offset = action.deltaX;
+        if (Math.abs(action.deltaX) < this.swipeLimit) {
+            elementRef.style.left = action.deltaX + 'px';
+        } else {
+            if (action.deltaX > 0) {
+                elementRef.style.left = this.swipeLimit + 'px';
+            } else {
+                elementRef.style.left = -this.swipeLimit + 'px';
+
+            }
+        }
+        if (offset > this.swipeThreshold) {
+            this.currentSwipeColor = this.leftColor;
+        } else if (offset < -this.swipeThreshold) {
+            this.currentSwipeColor = this.rightColor;
+        } else {
+            this.currentSwipeColor = this.defaultSwipeColor;
+        }
     }
 
     panEndEvent(action, index, elementRef): void {
-        const offset = this.getLeftPosition(elementRef);
-        if (offset > this.swipeThreshold || (offset < -this.swipeThreshold)) {
-            this.removeElement(index); // TODO make this a invoke/emit action.
-        } else {
-            this.ngstdIndexNumber = index;
+        const offset = elementRef;
+        if (offset > this.swipeThreshold) {
+            this.emitLeftAction(index);
+        } else if (offset < -this.swipeThreshold) {
+            this.emitRightAction(index);
+        }
+        this.lastAnimatedIndex = index;
+    }
+
+    tapEvent(index) {
+        const tapItem = this.dataSource[index];
+        if (this.tapAction.observers) {
+            this.tapAction.emit(tapItem);
         }
     }
 
     slideComplete(event): void {
         event.element.style.left = '0px';
-        console.log('slide done');
-        // event.element.offsetLeft > 0 ? this.elementLeftSign = true : this.elementLeftSign = false;
-        this.ngstdIndexNumber = null;
+        this.lastAnimatedIndex = null;
     }
 
-    removeElement(index): void {
-        const deletedItem = this.dataSource[index];
-        this.dataSource.splice(index, 1);
-        this.swipeLeftAction.emit(deletedItem);
-    }
-
-    getLeftPosition(elementRef): number {
-        const currentleftPosition = elementRef.style.left.slice(0, -2);
-        if (currentleftPosition !== null) {
-            return (parseInt(
-                currentleftPosition, 10
-            ) * 100) / window.innerWidth;
-        } else {
-            return 0;
+    emitLeftAction(index) {
+        const actionItem = this.dataSource[index];
+        if (this.swipeLeftAction.observers) {
+            this.swipeLeftAction.emit(actionItem);
         }
     }
 
-    logWarnings(warningFor: string, extraMessage: any = null): void {
+    emitRightAction(index) {
+        const actionItem = this.dataSource[index];
+        if (this.swipeRightAction.observers) {
+            this.swipeRightAction.emit(actionItem);
+        }
+    }
+
+    logWarnings(warningFor: string, extraMessage?: string): void {
         if (!this.silenceWarnings) {
             switch (warningFor) {
                 case Warnings.SLIDE_THRESHOLD_NOT_FOUND:
                 case Warnings.ZERO_SLIDE_THRESHOLD_NOT_ALLOWED:
                 case Warnings.MAX_OFFSET_EXCEEDED:
                 case Warnings.INVALID_SLIDE_THRESHOLD_NOT_ALLOWED:
-                    extraMessage === null ? console.warn(this.getConstValue(warningFor)) : console.warn(this.getConstValue(warningFor), extraMessage);
+                    extraMessage ? console.warn(this.getConstValue(warningFor)) : console.warn(this.getConstValue(warningFor), extraMessage);
                     break;
             }
         }
     }
 
     getConstValue(constantName: string): string {
-        return Constants[constantName];
+        return Warnings[constantName];
     }
 }

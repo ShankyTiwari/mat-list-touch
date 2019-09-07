@@ -1,10 +1,10 @@
-# ng-swipe-to-delete
+# ng-mat-list-swipe
 
-Material Swipe to delete list for Angular Projects.
+A list component with swipe/touch events to emit events meant for Angular 6+ Projects. This project will either replace the ng-swipe-to-delete or fork+PR into it.
 
-## Why ng-swipe-to-delete?
+## Why ng-mat-list-swipe?
 
-This module provides **Four** types of the listviews, so no need to write code for the listview again and again. With the help of this module, you can easily integrate list view having **Swipe to delete feature**. This module should work with all kind of screens width.
+This module provides **Four** types of the listviews, so no need to write code for the listview again and again. With the help of this module, you can easily integrate list view having **Swipe to action feature**. This module should work with all kind of screens width.
 
 ## Demo
 
@@ -28,14 +28,14 @@ Follow below steps to add multi level list in your project
 
 #### 1. Import NgSwipeToDeleteModule
 
-You need to import the ```NgSwipeToDeleteModule``` in the module of your app, where you want to use it.
+You need to import the ```NgMatListSwipeModule``` in the module of your app, where you want to use it.
 
 ```typescript        
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 /* Import the module*/
-import { NgSwipeToDeleteModule } from 'ng-swipe-to-delete';
+import { NgMatListSwipeModule } from 'ng-mat-list-swipe';
 
 import { AppComponent } from './app.component';
 
@@ -45,7 +45,7 @@ import { AppComponent } from './app.component';
     ],
     imports: [
         BrowserModule,
-        NgSwipeToDeleteModule // Import here
+        NgMatListSwipeModule // Import here
     ],
     providers: [],
     bootstrap: [AppComponent]
@@ -54,16 +54,16 @@ export class AppModule { }
 ```  
 
         
-#### 2. Use ```<ng-swipe-to-delete>``` in your HTML
+#### 2. Use ```<ng-mat-list-swipe>``` in your HTML
 
-In your HTML: Use the ```<ng-swipe-to-delete>```, wherever you like in your project.
+In your HTML: Use the ```<ng-mat-list-swipe>```, wherever you like in your project.
 
 ```html        
-<ng-swipe-to-delete
+<ng-mat-list-swipe
     [items]='outgoingdata' 
     [configuration]='config'
     (deletedItem)='deletedItem($event)'
-></ng-swipe-to-delete>
+></ng-mat-list-swipe>
 ```
         
 #### 3. Structure of array to display the list
@@ -84,7 +84,7 @@ Make sure, your structure of array should look like array shown below,
       }
     },
     {
-      title: 'Capton America',
+      title: 'Captain America',
       icon: `view_stream`,
       img: `/assets/captainamerica.jpg`,
       description: `Captain America is the alter ego of Steve Rogers.`,
@@ -182,6 +182,6 @@ To render Listview with icons or Listview with Avatars use the below options.
 
 I welcome you to fork and add more features into it. If you have any bugs or feature request, please create an issue at [github repository](https://github.com/ShankyTiwari/ng-swipe-to-delete/issues).
 
-## Leicense
+## License
 
 MIT

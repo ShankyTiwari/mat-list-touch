@@ -53,7 +53,6 @@ export class NgMatListSwipeComponent implements OnInit {
 
     ngOnInit() {
         this.resetSwipeList();
-        console.log(this.dataSource);
     }
 
     resetSwipeList(): void {
@@ -99,10 +98,9 @@ export class NgMatListSwipeComponent implements OnInit {
     }
 
     panEndEvent(action, index, elementRef): void {
-        const offset = elementRef;
-        if (offset > this.swipeThreshold) {
+        if (action.deltaX > this.swipeThreshold) {
             this.emitLeftAction(index);
-        } else if (offset < -this.swipeThreshold) {
+        } else if (action.deltaX < -this.swipeThreshold) {
             this.emitRightAction(index);
         }
         this.lastAnimatedIndex = index;

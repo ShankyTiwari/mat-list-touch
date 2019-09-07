@@ -1,10 +1,10 @@
-.ngstd-main-canvas {
+.list-canvas {
     /deep/
     mat-list-item .mat-list-item-content {
         padding: 0 !important;
     }
 
-    .ngstd-delete-indicator {
+    .slide-action-indicator {
         height: 100%;
         width: 100%;
         background-color: red;
@@ -14,7 +14,7 @@
         align-items: center;
         flex-shrink: 0;
 
-        .ngstd-delete-icon {
+        .slide-action-icon {
             margin-left: 16px;
             margin-right: 16px;
             width: 24px;
@@ -24,7 +24,7 @@
         }
     }
 
-    .ngstd-item-container {
+    .list-item-container {
         //padding: 0 16px !important;
         background-color: #fff;
         width: 100%;
@@ -36,11 +36,11 @@
         position: relative;
         height: inherit;
 
-        .ngstd-details {
+        .list-item-details {
             padding-left: 16px !important;
         }
 
-        .ngstd-icon {
+        .list-item-icon {
             color: rgba(0, 0, 0, 0.54);
         }
     }

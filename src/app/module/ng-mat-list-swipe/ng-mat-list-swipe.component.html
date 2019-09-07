@@ -1,0 +1,45 @@
+<mat-list *ngIf="dataSource" [@listAnimation]="dataSource?.length" class="list-canvas">
+    <mat-list-item *ngFor="let item of dataSource; let i = index">
+        <div class="slide-action-indicator">
+            <i class="material-icons slide-action-icon">delete_sweep</i>
+            <span>&nbsp;</span>
+            <!--                <i *ngIf="numberOfDeleteIcon === 2 && !getLeftSign()" class="material-icons ngstd-delete-icon">delete_sweep</i>-->
+        </div>
+
+        <div #element (@slideRow.done)=slideComplete($event)
+             (panend)="panEndEvent($event, i, element)"
+             (panmove)="panMoveEvent($event,element)"
+             [@slideRow]="ngstdIndexNumber === i"
+             class="list-item-container">
+            <ng-container *ngIf="listType === EnumListType.LISTWITHIMAGE">
+                <img alt="{{item.title}}" matListAvatar src="{{item.img}}">
+                <div class="mat-list-text list-item-details">
+                    <h3 matLine> {{item.title}}</h3>
+                    <p matLine>
+                        <span> {{item.description}} </span>
+                    </p>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="listType === EnumListType.LISTWITHICON">
+                <mat-icon class="list-item-icon" mat-list-icon>{{item.icon}}</mat-icon>
+                <div class="mat-list-text list-item-details">
+                    <h4 mat-line>{{item.title}}</h4>
+                    <p mat-line> {{item.description}} </p>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="listType === EnumListType.SINGLELINE">
+                <mat-list-item> {{item.title}} </mat-list-item>
+            </ng-container>
+            <ng-container *ngIf="listType === EnumListType.MULTILINE">
+                <div class="mat-list-text list-item-details">
+                    <h3 matLine> {{item.title}} </h3>
+                    <p matLine>
+                        <span> {{item.description}} </span>
+                        <span class="demo-2"> -- {{item.description}} </span>
+                    </p>
+                </div>
+            </ng-container>
+        </div>
+        <mat-divider></mat-divider>
+    </mat-list-item>
+</mat-list>

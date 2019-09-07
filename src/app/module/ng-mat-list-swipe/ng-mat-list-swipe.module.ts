@@ -1,23 +1,23 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
-import {MaterialsModule} from './materials.module';
-import {NgSwipeToDeleteComponent} from './ng-swipe-to-delete.component';
+import {NgMatImportModule} from './ng-mat-import.module';
+import {NgMatListSwipeComponent} from './ng-mat-list-swipe.component';
 import {GestureConfig} from './config/gesture-config';
 
 @NgModule({
     imports: [
         CommonModule,
-        MaterialsModule
+        NgMatImportModule
     ],
-    declarations: [NgSwipeToDeleteComponent],
+    declarations: [NgMatListSwipeComponent],
     exports: [
-        NgSwipeToDeleteComponent
+        NgMatListSwipeComponent
     ],
     providers: [{
         provide: HAMMER_GESTURE_CONFIG,
         useClass: GestureConfig,
     }]
 })
-export class NgSwipeToDeleteModule {
+export class NgMatListSwipeModule {
 }

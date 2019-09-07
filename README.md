@@ -26,7 +26,7 @@ yarn add --save ng-swipe-to-delete
 ## Usage
 Follow below steps to add multi level list in your project
 
-#### 1. Import NgSwipeToDeleteModule
+#### 1. Import NgMatListSwipeModule
 
 You need to import the ```NgMatListSwipeModule``` in the module of your app, where you want to use it.
 

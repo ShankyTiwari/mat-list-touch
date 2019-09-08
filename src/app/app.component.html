@@ -1,6 +1,5 @@
-<ng-swipe-to-delete
-    [configuration]='config'
-    [items]='outgoingdata' 
-    (deletedItem)='deletedItem($event)'
-></ng-swipe-to-delete>
+<ng-mat-list-swipe
+    [dataSource]='outgoingdata'
+    (swipeLeftAction)='deletedItem($event)'
+></ng-mat-list-swipe>
 

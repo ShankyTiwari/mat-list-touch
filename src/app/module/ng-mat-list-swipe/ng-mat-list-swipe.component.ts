@@ -1,12 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {animate, keyframes, query, stagger, style, transition, trigger} from '@angular/animations';
 import {Constants, Warnings} from './utils/constants';
-import {IListDataSource} from "./utils/list-data-source.model";
+import {IListDataSource} from './utils/list-data-source.model';
 
 @Component({
     selector: 'ng-mat-list-swipe',
     templateUrl: './ng-mat-list-swipe.component.html',
     styleUrls: ['./ng-mat-list-swipe.component.scss'],
+    encapsulation: ViewEncapsulation.None,
     animations: [
         trigger('listAnimation', [
             transition('* => *', [
@@ -29,16 +30,14 @@ import {IListDataSource} from "./utils/list-data-source.model";
 })
 export class NgMatListSwipeComponent implements OnInit {
     @Input() swipeThreshold?: number = Constants.DEFAULT_THRESHOLD;
-    @Input() swipeLimit?: number = 150;
+    @Input() swipeLimit?: number = Constants.DEFAULT_LIMIT;
     @Input() multiLine?: boolean = true;
     @Input() icon?: boolean = false;
     @Input() avatar?: boolean = false;
     @Input() leftColor?: string = 'green';
     @Input() leftIcon?: string = 'check';
-    @Input() leftBorder?: string;
     @Input() rightColor?: string = 'red';
     @Input() rightIcon?: string = 'not_interested';
-    @Input() rightBorder?: string;
     @Input() defaultSwipeColor?: string = 'gray';
     currentSwipeColor = this.defaultSwipeColor;
 

@@ -1,9 +1,8 @@
 export const Constants = {
     MAX_OFFSET: 50,
     MIN_OFFSET: 0,
-    DEFAULT_THRESHOLD: 16,
-    NUMBER_OF_DELETE_ICONS: 2,
-    DEFAULT_CONTAINER_CLASS: `ngstd-main-canvas`,
+    DEFAULT_THRESHOLD: 50,
+    DEFAULT_LIMIT: 150,
 };
 
 export enum Warnings {

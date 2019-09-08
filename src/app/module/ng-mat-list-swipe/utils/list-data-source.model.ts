@@ -3,5 +3,7 @@ export interface IListDataSource<T> {
     icon?: string;
     img?: string;
     description?: string;
+    leftBorder?: string;
+    rightBorder?: string;
     data: T;
 }

@@ -1,5 +1,5 @@
 {
-  "name": "ng-swipe-to-delete",
+  "name": "ng-mat-list-swipe",
   "version": "1.0.3",
   "scripts": {
     "ng": "ng",
@@ -19,11 +19,12 @@
     "Angular2",
     "Angular4",
     "Angular6",
+    "Angular8",
     "Angular",
-    "swipe-to-delete",
-    "swipe-and-delete",
-    "angular-swipe-to-delete",
-    "angular-swipe-and-delete"
+    "ng-mat-list-swipe",
+    "swipe-and-action",
+    "angular-swipe-to-action",
+    "angular-swipe-and-action"
   ],
   "author": "Shashank Tiwari <shashank@codershood.info>",
   "license": "MIT",
@@ -49,13 +50,13 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.3",
-    "@angular/cli": "~6.0.3",
+    "@angular/cli": "^8.3.3",
     "@angular/compiler-cli": "^6.0.2",
     "@angular/language-service": "^6.0.2",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
-    "codelyzer": "~4.2.1",
+    "codelyzer": "^5.0.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",

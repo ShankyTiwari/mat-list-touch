@@ -15,12 +15,12 @@ You can use either the npm or yarn command-line tool to install packages. Use wh
 
 #### NPM
 ```  
-npm install --save ng-swipe-to-delete
+npm install --save ng-mat-list-swipe
 ```
         
 #### YARN
 ```          
-yarn add --save ng-swipe-to-delete
+yarn add --save ng-mat-list-swipe
 ```
         
 ## Usage

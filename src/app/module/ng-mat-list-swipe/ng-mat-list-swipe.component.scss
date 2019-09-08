@@ -3,9 +3,9 @@
 }
 
 .list-canvas {
-    /deep/
     mat-list-item .mat-list-item-content {
         padding: 0 !important;
+        overflow: hidden;
     }
 
     .slide-action-indicator {

@@ -11,6 +11,7 @@
              (panmove)="panMoveEvent($event, element)"
              (tap)="tapEvent(i)"
              [@slideRow]="lastAnimatedIndex === i"
+             [ngStyle]="{'border-left': item.leftBorder, 'border-right':item.rightBorder}"
              class="list-item-container">
             <ng-container *ngIf="multiLine && avatar">
                 <img alt="{{item.title}}" matListAvatar src="{{item.img ? item.img : ''}}">

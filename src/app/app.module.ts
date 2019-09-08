@@ -1,9 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AppComponent } from './app.component';
-import { NgSwipeToDeleteModule } from './module/ng-swipe-to-delete/ng-swipe-to-delete.module';
+import {AppComponent} from './app.component';
+import {NgMatListSwipeModule} from './module/ng-mat-list-swipe/ng-mat-list-swipe.module';
+import {NgModule} from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -12,9 +11,10 @@ import { NgSwipeToDeleteModule } from './module/ng-swipe-to-delete/ng-swipe-to-d
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NgSwipeToDeleteModule
+    NgMatListSwipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

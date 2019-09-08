@@ -1,6 +1,5 @@
-<ng-swipe-to-delete
-    [configuration]='config'
-    [items]='outgoingdata' 
-    (deletedItem)='deletedItem($event)'
-></ng-swipe-to-delete>
-
+<h1> Welcome to an example of mat-list-touch!</h1>
+<mat-list-touch
+  [dataSource]='dataSource'
+  (swipeLeftAction)='swipeLeftEvent($event)'
+  (swipeRightAction)='swipeRightEvent($event)'></mat-list-touch>

@@ -1,9 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgSwipeToDeleteModule } from './module/ng-swipe-to-delete/ng-swipe-to-delete.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatListTouchModule} from '../../projects/mat-list-touch/src/lib/mat-list-touch.module';
+import 'hammerjs';
 
 @NgModule({
   declarations: [
@@ -12,9 +14,10 @@ import { NgSwipeToDeleteModule } from './module/ng-swipe-to-delete/ng-swipe-to-d
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NgSwipeToDeleteModule
+    AppRoutingModule,
+    MatListTouchModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

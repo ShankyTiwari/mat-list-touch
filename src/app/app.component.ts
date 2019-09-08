@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
-  outgoingdata = [
+  title = 'ng-mat-list-touch';
+  dataSource = [
     {
       title: 'Iron Man',
       icon: `pan_tool`,
@@ -117,16 +117,15 @@ export class AppComponent {
       }
     }
   ];
-  config = {
-    listType: 'listwithimage',
-    slideThreshold : 12,
-    numberOfDeleteIcon : 2,
-    disableWarnings: false,
-    classname : 'my-custom-class'
-  }
-  constructor() {}
 
-  deletedItem(event) {
-    console.log(event);
+  constructor() {
+  }
+
+  swipeLeftEvent(event) {
+    console.log('Swiped left, event: ', event);
+  }
+
+  swipeRightEvent(event) {
+    console.log('Swiped right, event: ', event);
   }
 }

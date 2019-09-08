@@ -1,0 +1,50 @@
+.list-canvas.mat-list-base {
+    padding-top: 0;
+}
+
+.list-canvas {
+    mat-list-item .mat-list-item-content {
+        padding: 0 !important;
+        overflow: hidden;
+    }
+
+    .slide-action-indicator {
+        height: 100%;
+        width: 100%;
+        background-color: green;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        align-items: center;
+        flex-shrink: 0;
+
+        .slide-action-icon {
+            margin-left: 16px;
+            margin-right: 16px;
+            width: 24px;
+            height: 24px;
+            font-size: 24px;
+            color: #fff;
+        }
+    }
+
+    .list-item-container {
+        background-color: #fff;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 16px;
+        position: relative;
+        height: inherit;
+
+        .list-item-details {
+            padding-left: 16px !important;
+        }
+
+        .list-item-icon {
+            color: rgba(0, 0, 0, 0.54);
+        }
+    }
+}

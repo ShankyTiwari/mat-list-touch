@@ -1,0 +1,90 @@
+.list-canvas.mat-list-base {
+    padding-top: 0;
+}
+
+.stripe-angled {
+    color: black;
+    background: repeating-linear-gradient(
+            45deg,
+            rgba(33, 150, 243, 0.1),
+            rgba(33, 150, 243, 0.1) 5px,
+            #f1f8ff 10px,
+            #f1f8ff 20px
+    );
+}
+
+.list-canvas {
+    mat-list-item {
+        height: 60px !important;
+
+        .mat-list-item-content {
+            padding: 0 !important;
+            overflow: hidden;
+        }
+    }
+
+    mat-list-item.separator {
+        height: 20px !important;
+    }
+
+    .slide-action-indicator {
+        height: 100%;
+        width: 100%;
+        background-color: green;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        align-items: center;
+        flex-shrink: 0;
+
+        .slide-action-icon {
+            margin-left: 16px;
+            margin-right: 16px;
+            width: 24px;
+            height: 24px;
+            font-size: 24px;
+            color: #f1f8ff;
+        }
+    }
+
+    .list-item-container {
+        background-color: #fff;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: relative;
+        height: inherit;
+
+        > .list-item-identity {
+            padding-left: 16px !important;
+            padding-right: 16px !important;
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        > .list-item-details {
+            padding-right: 16px !important;
+        }
+    }
+}
+
+.list-canvas-big {
+    mat-list-item {
+        height: 80px !important;
+    }
+
+    .list-item-container {
+        > .list-item-identity {
+            padding-left: 24px !important;
+            padding-right: 24px !important;
+        }
+
+        > .list-item-details {
+            padding-right: 24px !important;
+        }
+    }
+}
+
+.list-item-hoverable:hover {
+    background-color: rgb(240, 248, 255);
+}

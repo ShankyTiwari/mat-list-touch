@@ -1,6 +1,60 @@
-<ng-swipe-to-delete
-    [configuration]='config'
-    [items]='outgoingdata' 
-    (deletedItem)='deletedItem($event)'
-></ng-swipe-to-delete>
+<div class="mat-elevation-z1" ngClass.gt-sm="margin-container">
+    <!--    <app-search-bar-->
+    <!--        (searchChange)="searchChanged($event)"-->
+    <!--        [disabled]="loading"-->
+    <!--        [searchHint]="'Showing ' + dataSource?.data.length + (eventFilters.past.include ? ' previous events (from August)' : ' upcoming events')">-->
+    <!--    </app-search-bar>-->
 
+    <mat-list-touch (swipeLeftAction)="attendEvent($event)"
+                    (swipeRightAction)="notAttendEvent($event)"
+                    <!-- [disableActionsEval]="eventService.isEventLocked" -->
+                    <!-- (tapAction)="eventService.tapEvent($event)" -->
+                    
+                    <!-- Note how we connect to the inner data observable -->
+                    [dataSource]="listData.connect().value"
+                    
+                    [icon]="true"
+                    <!-- [separatorEval]="eventService.isNewWeek" -->
+                    <!-- [leftBorderEval]="eventService.statusToBorder" -->
+                    <!-- [rightBorderEval]="eventService.statusToBorder" -->
+                    >
+        <ng-template #separatorTemplate let-item>
+            <span fxFlexAlign="center" class="week-separator">
+                {{item.start | date: '\'WEEK\' w'}}{{eventFilters.past.include ? ' (past)' : ''}}
+            </span>
+            <mat-divider></mat-divider>
+        </ng-template>
+        <ng-template #identityTemplate let-item>
+            <div fxLayout="column">
+                <small class="mat-caption thor_blue date-tile-day" fxFlexAlign="auto">
+                    {{item.start | date: 'EEE'}}
+                </small>
+                <span class="date-tile-date" fxFlexAlign="stretch">
+                    {{item.start | date: 'dd'}}
+                </span>
+                <span class="date-tile-month" fxFlexAlign="stretch">
+                    {{item.start | date:'MMM'}}
+                </span>
+            </div>
+        </ng-template>
+        <ng-template #contentTemplate let-item>
+            <mat-icon class="icon-tile" ngClass.gt-sm="icon-tile-big">
+                {{eventService.typeToIcon(item.type) ? eventService.typeToIcon(item.type) : 'help_outline'}}
+            </mat-icon>
+            <div fxLayout="column" fxLayoutAlign="center begin"
+                 class="mat-list-text list-item-details">
+                <small class="text-ellipsis">
+                    <strong>{{item.name }}</strong>
+                </small>
+                <small class="text-ellipsis time-row">
+                    {{item.start | date:'HH:mm'}}-{{item.end | date:'HH:mm'}}
+                </small>
+                <small class="text-ellipsis" fxHide.lt-md>
+                    {{item.description}}
+                </small>
+            </div>
+            <mat-icon class="icon-tile" ngClass.gt-sm="icon-tile-big" *ngIf="item.locked">
+                lock
+            </mat-icon>
+        </ng-template>
+    </mat-list-touch>

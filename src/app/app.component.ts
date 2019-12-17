@@ -7,7 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-  outgoingdata = [
+  // Change this data to a datasource
+  // F.e. listData = new MatTableDataSource<IListData>();
+  // IListData then is your interface definition
+  listData = [
     {
       title: 'Iron Man',
       icon: `pan_tool`,

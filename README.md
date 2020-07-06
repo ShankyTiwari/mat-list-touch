@@ -153,7 +153,7 @@ listData = new MatTableDataSource<ListItem>(
 1. [Material Icons](https://material.io/tools/icons/?style=baseline)
 2. [Angular Material](https://material.angular.io)
 3. [HammerJs](https://hammerjs.github.io/)
-
+4. [Angular FlexLayout](https://github.com/angular/flex-layout)
 ## Contribution
 
 I welcome you to fork and add more features into it. If you have any bugs or feature request, please create an issue at [github repository](https://github.com/ShankyTiwari/ng-swipe-to-delete/issues).

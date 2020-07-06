@@ -17,11 +17,11 @@
                      [@slideRow]="lastAnimatedIndex === i"
                      (@slideRow.done)=slideComplete($event)
                      (panend)="panEndEvent($event, i, element)"
-                     (panleft)="panMoveEvent($event, element, item)"
-                     (panright)="panMoveEvent($event, element, item)"
+                     (panleft)="panMoveEvent($event, element, i, item)"
+                     (panright)="panMoveEvent($event, element, i, item)"
                      (tap)="tapEvent(i)"
                      class="list-item-container list-item-hoverable"
-                     [ngStyle]="{'border-left': evalLeftBorder(item), 'border-right': evalRightBorder(item)}">
+                     [ngStyle]="{'border-left': evalLeftBorder(i, item), 'border-right': evalRightBorder(i, item)}">
                     <div class="list-item-identity">
                         <ng-template ngFor let-item [ngForOf]="[item]" [ngForTemplate]="identityTemplate">
                         </ng-template>

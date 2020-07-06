@@ -3,6 +3,11 @@ import {animate, keyframes, style, transition, trigger} from '@angular/animation
 import {Constants, Warnings} from './utils/constants';
 import {rowsAnimation} from './animations/row.animation';
 
+export interface TouchActionEvent {
+    index: number;
+    data: any;
+}
+
 @Component({
     selector: 'mat-list-touch',
     templateUrl: './mat-list-touch.component.html',
@@ -24,45 +29,43 @@ export class MatListTouchComponent implements OnInit {
     @ContentChild('separatorTemplate', {static: true}) separatorTemplate: TemplateRef<ElementRef>;
     @ContentChild('identityTemplate', {static: true}) identityTemplate: TemplateRef<ElementRef>;
 
-    @Input() swipeThreshold?: number = Constants.DEFAULT_THRESHOLD;
-    @Input() swipeLimit?: number = Constants.DEFAULT_LIMIT;
-    @Input() multiLine?: boolean = true;
-    @Input() icon?: boolean = false;
-    @Input() avatar?: boolean = false;
+    @Input() dataSource: any[];
+    @Output() swipeLeftAction = new EventEmitter<TouchActionEvent>();
+    @Output() swipeRightAction = new EventEmitter<TouchActionEvent>();
+    @Output() tapAction = new EventEmitter<TouchActionEvent>();
+
     @Input() separatorEval?: (index: number, item: any) => boolean;
+    @Input() leftBorderEval?: (index: number, value: any) => string;
+    @Input() rightBorderEval?: (index: number, value: any) => string;
+    @Input() disableActionsEval: (index: number, value: any) => boolean;
+
     @Input() leftColor?: string = 'green';
     @Input() leftIcon?: string = 'check';
-    @Input() leftBorderEval?: (value: any) => string;
     @Input() rightColor?: string = 'red';
     @Input() rightIcon?: string = 'not_interested';
-    @Input() rightBorderEval?: (value: any) => string;
     @Input() defaultSwipeColor?: string = 'gray';
-    @Input() disableActionsEval: (value: any) => boolean;
-    currentSwipeColor = this.defaultSwipeColor;
 
+    @Input() swipeThreshold?: number = Constants.DEFAULT_THRESHOLD;
+    @Input() swipeLimit?: number = Constants.DEFAULT_LIMIT;
     @Input() silenceWarnings?: boolean = false;
 
-    @Input() dataSource: any[];
-    @Output() swipeLeftAction = new EventEmitter<any>();
-    @Output() swipeRightAction = new EventEmitter<any>();
-    @Output() tapAction = new EventEmitter<any>();
-
+    currentSwipeColor = this.defaultSwipeColor;
     lastAnimatedIndex: number = null;
 
     ngOnInit() {
         this.resetSwipeList();
     }
 
-    evalLeftBorder(item) {
+    evalLeftBorder(index: number, item: any) {
         if (this.leftBorderEval) {
-            return this.leftBorderEval(item);
+            return this.leftBorderEval(index, item);
         }
         return '';
     }
 
-    evalRightBorder(item) {
+    evalRightBorder(index: number, item: any) {
         if (this.rightBorderEval) {
-            return this.rightBorderEval(item);
+            return this.rightBorderEval(index, item);
         }
         return '';
     }
@@ -89,8 +92,8 @@ export class MatListTouchComponent implements OnInit {
         }
     }
 
-    panMoveEvent(action, elementRef, item): void {
-        if (this.disableActionsEval && this.disableActionsEval(item)) {
+    panMoveEvent(action, elementRef, index, item): void {
+        if (this.disableActionsEval && this.disableActionsEval(index, item)) {
             elementRef.style.left = 0;
             return;
         }
@@ -136,7 +139,10 @@ export class MatListTouchComponent implements OnInit {
     tapEvent(index) {
         const tapItem = this.dataSource[index];
         if (this.tapAction.observers) {
-            this.tapAction.emit(tapItem);
+            this.tapAction.emit({
+                index,
+                data: tapItem
+            });
         }
     }
 
@@ -148,14 +154,20 @@ export class MatListTouchComponent implements OnInit {
     emitLeftAction(index) {
         const actionItem = this.dataSource[index];
         if (this.swipeLeftAction.observers) {
-            this.swipeLeftAction.emit(actionItem);
+            this.swipeLeftAction.emit({
+                index,
+                data: actionItem
+            });
         }
     }
 
     emitRightAction(index) {
         const actionItem = this.dataSource[index];
         if (this.swipeRightAction.observers) {
-            this.swipeRightAction.emit(actionItem);
+            this.swipeRightAction.emit({
+                index,
+                data: actionItem
+            });
         }
     }
 

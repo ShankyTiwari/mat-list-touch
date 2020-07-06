@@ -2,7 +2,6 @@
     <mat-list-touch (swipeLeftAction)="listItemSwipeLeft($event)"
                     (swipeRightAction)="listItemSwipeRight($event)"
                     [dataSource]="listData.connect().value"
-                    [icon]="true"
                     [separatorEval]="evaluateSeparatorRequired"
     >
         <!-- Some more optional things-->

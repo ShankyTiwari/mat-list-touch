@@ -1,7 +1,7 @@
 import {Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, Output, TemplateRef, ViewEncapsulation} from '@angular/core';
 import {animate, keyframes, style, transition, trigger} from '@angular/animations';
-import {Constants, Warnings} from 'src/app/module/mat-list-touch/utils/constants';
-import {rowsAnimation} from 'src/app/module/mat-list-touch/animations/row.animation';
+import {Constants, Warnings} from './utils/constants';
+import {rowsAnimation} from './animations/row.animation';
 
 @Component({
     selector: 'mat-list-touch',

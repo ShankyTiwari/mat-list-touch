@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { NgSwipeToDeleteModule } from './module/ng-swipe-to-delete/ng-swipe-to-delete.module';
+import {MatListTouchModule} from 'src/app/module/mat-list-touch/mat-list-touch.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { NgSwipeToDeleteModule } from './module/ng-swipe-to-delete/ng-swipe-to-d
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NgSwipeToDeleteModule
+    MatListTouchModule
   ],
   providers: [],
   bootstrap: [AppComponent]

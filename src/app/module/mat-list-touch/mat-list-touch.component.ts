@@ -1,17 +1,7 @@
-import {
-    Component,
-    ContentChild,
-    ElementRef,
-    EventEmitter,
-    Input,
-    OnInit,
-    Output,
-    TemplateRef,
-    ViewEncapsulation
-} from '@angular/core';
+import {Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, Output, TemplateRef, ViewEncapsulation} from '@angular/core';
 import {animate, keyframes, style, transition, trigger} from '@angular/animations';
-import {Constants, Warnings} from './utils/constants';
-import {rowsAnimation} from './animations/row.animation';
+import {Constants, Warnings} from 'src/app/module/mat-list-touch/utils/constants';
+import {rowsAnimation} from 'src/app/module/mat-list-touch/animations/row.animation';
 
 @Component({
     selector: 'mat-list-touch',
@@ -84,10 +74,12 @@ export class MatListTouchComponent implements OnInit {
     setThreshold(): void {
         if (this.swipeThreshold < Constants.MIN_OFFSET || this.swipeThreshold > Constants.MAX_OFFSET) {
             if (this.swipeThreshold > Constants.MAX_OFFSET) {
-                this.logWarnings(Warnings.MAX_OFFSET_EXCEEDED, `${Warnings.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_THRESHOLD}%.`);
+                this.logWarnings(Warnings.MAX_OFFSET_EXCEEDED,
+                    `${Warnings.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_THRESHOLD}%.`);
             }
             if (this.swipeThreshold < Constants.MIN_OFFSET || this.swipeThreshold === Constants.MIN_OFFSET) {
-                this.logWarnings(Warnings.ZERO_SLIDE_THRESHOLD_NOT_ALLOWED, `${Warnings.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_THRESHOLD}%.`);
+                this.logWarnings(Warnings.ZERO_SLIDE_THRESHOLD_NOT_ALLOWED,
+                    `${Warnings.ADDING_DEFAULT_SLIDE_THRESHOLD} ${Constants.DEFAULT_THRESHOLD}%.`);
             }
             this.swipeThreshold = Constants.DEFAULT_THRESHOLD;
         }
@@ -174,7 +166,9 @@ export class MatListTouchComponent implements OnInit {
                 case Warnings.ZERO_SLIDE_THRESHOLD_NOT_ALLOWED:
                 case Warnings.MAX_OFFSET_EXCEEDED:
                 case Warnings.INVALID_SLIDE_THRESHOLD_NOT_ALLOWED:
-                    extraMessage ? console.warn(this.getConstValue(warningFor)) : console.warn(this.getConstValue(warningFor), extraMessage);
+                    extraMessage ?
+                        console.warn(this.getConstValue(warningFor)) :
+                        console.warn(this.getConstValue(warningFor), extraMessage);
                     break;
             }
         }

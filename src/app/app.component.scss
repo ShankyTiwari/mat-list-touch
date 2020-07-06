@@ -1,0 +1,45 @@
+.loading-bgcolor {
+  background-color: gray;
+}
+
+// Our special mat-list
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+.week-separator {
+  font-variant: small-caps;
+}
+.date-tile-day {
+  margin-bottom: -4px;
+}
+.date-tile-date {
+  font-size: 15pt;
+}
+.date-tile-month {
+  font-variant: small-caps;
+  opacity: 0.6;
+  font-size: 10pt;
+  margin-top: -4px;
+}
+.icon-tile {
+  padding-right: 16px;
+}
+.icon-tile-big {
+  padding-right: 24px;
+}
+.time-row {
+  color: rgba(0, 0, 0, 0.6);
+}
+.locked-mat-row {
+  background-color: #6c757d;
+}
+.unlocked-mat-row {
+  background-color: #fff;
+}
+
+.application_blue {
+  color: #03A9F4;
+}

@@ -1,5 +1,5 @@
 /*
- * Public API Surface of ng-swipe-to-delete
+ * Public API Surface of mat-list-touch
  */
 
-export * from './src/app/module/ng-swipe-to-delete/ng-swipe-to-delete.module';
+export * from './src/app/module/mat-list-touch/mat-list-touch.module';

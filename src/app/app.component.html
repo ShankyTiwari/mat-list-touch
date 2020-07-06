@@ -1,12 +1,13 @@
-<div class="mat-elevation-z1" ngClass.gt-sm="margin-container">
+<div class="mat-elevation-z1 loading-bgcolor" ngClass.gt-sm="margin-container">
     <mat-list-touch (swipeLeftAction)="listItemSwipeLeft($event)"
                     (swipeRightAction)="listItemSwipeRight($event)"
-                    [dataSource]="listData"
-                    [icon]="true">
-
+                    [dataSource]="listData.connect().value"
+                    [icon]="true"
+                    [separatorEval]="evaluateSeparatorRequired"
+    >
+        <!-- Some more optional things-->
         <!-- [disableActionsEval]="eventService.isEventLocked" -->
         <!-- (tapAction)="eventService.tapEvent($event)" -->
-        <!-- Note how we connect to the inner data observable -->
         <!-- [separatorEval]="eventService.isNewWeek" -->
         <!-- [leftBorderEval]="eventService.statusToBorder" -->
         <!-- [rightBorderEval]="eventService.statusToBorder" -->
@@ -20,7 +21,7 @@
 
         <ng-template #identityTemplate let-item>
             <div fxLayout="column">
-                <small class="mat-caption thor_blue date-tile-day" fxFlexAlign="auto">
+                <small class="mat-caption application_blue date-tile-day" fxFlexAlign="auto">
                     {{item.start | date: 'EEE'}}
                 </small>
                 <span class="date-tile-date" fxFlexAlign="stretch">
@@ -33,7 +34,7 @@
         </ng-template>
         <ng-template #contentTemplate let-item>
             <mat-icon class="icon-tile" ngClass.gt-sm="icon-tile-big">
-                'help_outline'
+                {{item.icon ? item.icon : 'help_outline' }}
             </mat-icon>
             <div class="mat-list-text list-item-details" fxLayout="column"
                  fxLayoutAlign="center begin">

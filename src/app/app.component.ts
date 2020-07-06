@@ -1,4 +1,15 @@
 import {Component} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+
+interface ListItem {
+    separator: boolean;
+    name: string;
+    icon: string;
+    start: number;
+    end: number;
+    description: string;
+    // This can all be changed to your liking and is just a helper interface
+}
 
 @Component({
     selector: 'app-root',
@@ -7,133 +18,38 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
     title = 'app';
-    // Change this data to a datasource
-    // F.e. listData = new MatTableDataSource<IListData>();
-    // IListData then is your interface definition
-    listData = [
+
+    // You can completely customize what the data looks like and how it is represented.
+    listData = new MatTableDataSource<ListItem>([
         {
-            title: 'Iron Man',
-            icon: `pan_tool`,
-            img: `/assets/ironman.jpg`,
-            description: `Iron Man is a fictional superhero.
-            A wealthy American business magnate, playboy, and ingenious scientist,
-            Anthony Edward "Tony" Stark suffers a severe chest injury during a kidnapping.  `,
-            data: {
-                name: 'Tony Stark',
-                abilities: [
-                    'Flying', 'Shooting', 'billionaire'
-                ]
-            }
+            separator: true,
+            name: 'Iron Man',
+            icon: 'pan_tool',
+            start: Date.now(),
+            end: Date.now(),
+            description: `Iron Man is a fictional superhero. He was the first, and will probably be the last.`,
         },
         {
-            title: 'Capton America',
-            icon: `view_stream`,
-            img: `/assets/captainamerica.jpg`,
+            separator: false,
+            name: 'Captain America',
+            icon: 'view_stream',
+            start: Date.now(),
+            end: Date.now(),
             description: `Captain America is a fictional superhero.Captain America is the alter ego of Steve Rogers,
             a frail young man enhanced to the peak of human perfection by an experimental
             serum to aid the United States government's efforts in World War II.`,
-            data: {
-                name: 'Steve Rogers',
-                abilities: [
-                    'Strong', 'Very Strong'
-                ]
-            }
         },
         {
-            title: 'Dr Strange',
-            icon: `offline_bolt`,
-            img: `/assets/drstange.jpg`,
+            separator: true,
+            name: 'Dr Strange',
+            icon: 'offline_bolt',
+            start: Date.now(),
+            end: Date.now(),
             description: `Doctor Stephen Vincent Strange is a fictional superhero.
             After a car accident severely damages his hands and hinders his ability to perform surgery,
             he searches the globe for a way to repair them and encounters the Ancient One. `,
-            data: {
-                name: 'Steven Strange',
-                abilities: [
-                    'Master of Mystic Art'
-                ]
-            }
-        },
-        {
-            title: 'Shaktiman',
-            icon: `flash_on`,
-            img: `/assets/shatiman.jpg`,
-            description: `Shaktimaan is an Indian fictional superhero.
-            Shaktimaan is depicted as a human who has attained superhuman strength
-            and power through deep meditation and attaining control over five elements of life.`,
-            data: {
-                name: 'Pandit Gangadhar',
-                abilities: [
-                    'Attractive male', 'Healing', 'Will power-based constructs', 'Flying'
-                ]
-            }
-        },
-        {
-            title: 'The Winter Soldier',
-            icon: `trending_up`,
-            img: `/assets/wintersoldier.jpg`,
-            description: `James Buchanan "Bucky" Barnes is a fictional superhero.
-            James Buchanan Barnes was born in Shelbyville, Indiana in 1925. Barnes grew up as an Army brat. `,
-            data: {
-                name: 'James Buchanan "Bucky" Barnes',
-                abilities: [
-                    'Hand to hand combat and Martial arts', 'Strong Arm'
-                ]
-            }
-        },
-        {
-            title: 'The Batman',
-            icon: `attach_money`,
-            img: `/assets/batman.jpg`,
-            description: ` Batman does not possess any superpowers; rather, he relies on his genius intellect,
-            physical prowess, martial arts abilities, detective skills, science and technology, vast wealth,
-            intimidation, and indomitable will. A large assortment of villains make
-            up Batman's rogues gallery, including his archenemy, the Joker.`,
-            data: {
-                name: 'Bruce wayne',
-                abilities: [
-                    'Rich', 'Strong'
-                ]
-            }
-        },
-        {
-            title: 'The Superman',
-            icon: `send`,
-            img: `/assets/superman.jpg`,
-            description: `Early in his childhood, he displays various superhuman abilities,
-            which, upon reaching maturity, he resolves to use for the benefit of humanity through a "Superman" identity.`,
-            data: {
-                name: 'Clark Kent',
-                abilities: [
-                    'Attractive male', 'Healing', 'Will power-based constructs', 'Flying'
-                ]
-            }
-        },
-        {
-            title: 'The Black Panther',
-            icon: `send`,
-            img: `/assets/blackpanther.jpg`,
-            description: `Black Panther's real name is T'Challa, king and protector of the fictional African nation of Wakanda.`,
-            data: {
-                name: `King T'Challa`,
-                abilities: [
-                    'Superhumanly acute senses', 'Enhanced strength', 'Speed', 'Agility', 'Stamina', 'Durability', 'Healing', 'Reflexes'
-                ]
-            }
-        },
-        {
-            title: 'The Hulk',
-            icon: `send`,
-            img: `/assets/thehulk.jpg`,
-            description: `Hulk, a green-skinned, hulking and
-            muscular humanoid possessing a vast degree of physical strength, and his alter ego Bruce Banner.`,
-            data: {
-                name: `Bruce Banner`,
-                abilities: [
-                    'Limitless physical strength'
-                ]
-            }
         }
-    ];
+    ]);
     config = {
         listType: 'listwithimage',
         slideThreshold: 12,
@@ -145,15 +61,15 @@ export class AppComponent {
     constructor() {
     }
 
-    deletedItem(event) {
-        console.log(event);
-    }
-
     listItemSwipeLeft($event: any) {
         console.log('Swiped left: ', $event);
     }
 
     listItemSwipeRight($event: any) {
         console.log('Swiped right: ', $event);
+    }
+
+    public evaluateSeparatorRequired(index: number, data: ListItem[]): boolean {
+        return !!data[index].separator;
     }
 }

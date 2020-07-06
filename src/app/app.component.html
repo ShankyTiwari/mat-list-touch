@@ -1,29 +1,23 @@
 <div class="mat-elevation-z1" ngClass.gt-sm="margin-container">
-    <!--    <app-search-bar-->
-    <!--        (searchChange)="searchChanged($event)"-->
-    <!--        [disabled]="loading"-->
-    <!--        [searchHint]="'Showing ' + dataSource?.data.length + (eventFilters.past.include ? ' previous events (from August)' : ' upcoming events')">-->
-    <!--    </app-search-bar>-->
+    <mat-list-touch (swipeLeftAction)="listItemSwipeLeft($event)"
+                    (swipeRightAction)="listItemSwipeRight($event)"
+                    [dataSource]="listData"
+                    [icon]="true">
 
-    <mat-list-touch (swipeLeftAction)="attendEvent($event)"
-                    (swipeRightAction)="notAttendEvent($event)"
-                    <!-- [disableActionsEval]="eventService.isEventLocked" -->
-                    <!-- (tapAction)="eventService.tapEvent($event)" -->
-                    
-                    <!-- Note how we connect to the inner data observable -->
-                    [dataSource]="listData.connect().value"
-                    
-                    [icon]="true"
-                    <!-- [separatorEval]="eventService.isNewWeek" -->
-                    <!-- [leftBorderEval]="eventService.statusToBorder" -->
-                    <!-- [rightBorderEval]="eventService.statusToBorder" -->
-                    >
+        <!-- [disableActionsEval]="eventService.isEventLocked" -->
+        <!-- (tapAction)="eventService.tapEvent($event)" -->
+        <!-- Note how we connect to the inner data observable -->
+        <!-- [separatorEval]="eventService.isNewWeek" -->
+        <!-- [leftBorderEval]="eventService.statusToBorder" -->
+        <!-- [rightBorderEval]="eventService.statusToBorder" -->
+
         <ng-template #separatorTemplate let-item>
-            <span fxFlexAlign="center" class="week-separator">
-                {{item.start | date: '\'WEEK\' w'}}{{eventFilters.past.include ? ' (past)' : ''}}
+            <span class="week-separator" fxFlexAlign="center">
+                {{item.start | date: '\'WEEK\' w'}}
             </span>
             <mat-divider></mat-divider>
         </ng-template>
+
         <ng-template #identityTemplate let-item>
             <div fxLayout="column">
                 <small class="mat-caption thor_blue date-tile-day" fxFlexAlign="auto">
@@ -39,10 +33,10 @@
         </ng-template>
         <ng-template #contentTemplate let-item>
             <mat-icon class="icon-tile" ngClass.gt-sm="icon-tile-big">
-                {{eventService.typeToIcon(item.type) ? eventService.typeToIcon(item.type) : 'help_outline'}}
+                'help_outline'
             </mat-icon>
-            <div fxLayout="column" fxLayoutAlign="center begin"
-                 class="mat-list-text list-item-details">
+            <div class="mat-list-text list-item-details" fxLayout="column"
+                 fxLayoutAlign="center begin">
                 <small class="text-ellipsis">
                     <strong>{{item.name }}</strong>
                 </small>
@@ -53,8 +47,9 @@
                     {{item.description}}
                 </small>
             </div>
-            <mat-icon class="icon-tile" ngClass.gt-sm="icon-tile-big" *ngIf="item.locked">
+            <mat-icon *ngIf="item.locked" class="icon-tile" ngClass.gt-sm="icon-tile-big">
                 lock
             </mat-icon>
         </ng-template>
     </mat-list-touch>
+</div>

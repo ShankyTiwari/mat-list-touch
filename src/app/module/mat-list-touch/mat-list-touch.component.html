@@ -1,0 +1,36 @@
+<mat-list *ngIf="dataSource" class="list-canvas" ngClass.gt-sm="list-canvas-big">
+    <ng-container *ngFor="let item of dataSource; let i = index;">
+        <mat-list-item class="separator" *ngIf="separatorEval(i, dataSource)">
+            <div fxLayout="column" class="list-item-container stripe-angled">
+                <ng-template ngFor let-item [ngForOf]="[item]" [ngForTemplate]="separatorTemplate">
+                </ng-template>
+            </div>
+        </mat-list-item>
+        <mat-list-item [@rowsAnimation]="">
+            <div class="slide-action-indicator" [ngStyle]="{'background-color': currentSwipeColor}">
+                <i class="material-icons slide-action-icon" *ngIf="swipeLeftAction.observers">{{leftIcon}}</i>
+                <span>&nbsp;</span>
+                <i class="material-icons slide-action-icon" *ngIf="swipeRightAction.observers">{{rightIcon}}</i>
+            </div>
+            <div fxLayout="column" style="width:100%; height:100%;">
+                <div #element fxLayout="row"
+                     [@slideRow]="lastAnimatedIndex === i"
+                     (@slideRow.done)=slideComplete($event)
+                     (panend)="panEndEvent($event, i, element)"
+                     (panleft)="panMoveEvent($event, element, i, item)"
+                     (panright)="panMoveEvent($event, element, i, item)"
+                     (tap)="tapEvent(i)"
+                     class="list-item-container list-item-hoverable"
+                     [ngStyle]="{'border-left': evalLeftBorder(i, item), 'border-right': evalRightBorder(i, item)}">
+                    <div class="list-item-identity">
+                        <ng-template ngFor let-item [ngForOf]="[item]" [ngForTemplate]="identityTemplate">
+                        </ng-template>
+                    </div>
+                    <ng-template ngFor let-item [ngForOf]="[item]" [ngForTemplate]="contentTemplate">
+                    </ng-template>
+                </div>
+                <mat-divider *ngIf="i !== (dataSource.length - 1)"></mat-divider>
+            </div>
+        </mat-list-item>
+    </ng-container>
+</mat-list>

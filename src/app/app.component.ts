@@ -69,7 +69,7 @@ export class AppComponent {
         console.log('Swiped right: ', $event);
     }
 
-    public evaluateSeparatorRequired(index: number, data: ListItem[]): boolean {
-        return !!data[index].separator;
-    }
+  public evaluateSeparatorRequired(data: ListItem[], index: number): boolean {
+    return !!(data[index]?.separator);
+  }
 }

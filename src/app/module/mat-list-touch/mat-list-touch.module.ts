@@ -7,20 +7,20 @@ import {GestureConfig} from './config/gesture-config';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        MaterialImportModule,
-        FlexLayoutModule,
-        HammerModule
-    ],
-    declarations: [MatListTouchComponent],
-    exports: [
-        MatListTouchComponent
-    ],
-    providers: [{
-        provide: HAMMER_GESTURE_CONFIG,
-        useClass: GestureConfig,
-    }]
+  imports: [
+    CommonModule,
+    MaterialImportModule,
+    FlexLayoutModule,
+    HammerModule
+  ],
+  declarations: [MatListTouchComponent],
+  exports: [
+    MatListTouchComponent
+  ],
+  providers: [{
+    provide: HAMMER_GESTURE_CONFIG,
+    useClass: GestureConfig,
+  }]
 })
 export class MatListTouchModule {
 }

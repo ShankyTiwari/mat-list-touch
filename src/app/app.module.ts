@@ -7,23 +7,25 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {GestureConfig} from 'src/app/module/mat-list-touch/config/gesture-config';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        BrowserModule,
-        MatListTouchModule,
-        BrowserAnimationsModule,
-        MatDividerModule,
-        MatIconModule,
-        FlexLayoutModule
-    ],
-    providers: [
-        {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig},
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    MatListTouchModule,
+    BrowserAnimationsModule,
+    MatDividerModule,
+    MatIconModule,
+    MatSnackBarModule,
+    FlexLayoutModule
+  ],
+  providers: [
+    {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig},
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

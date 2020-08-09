@@ -1,55 +1,59 @@
-<div class="mat-elevation-z1 loading-bgcolor" ngClass.gt-sm="margin-container">
+<section fxFlex="100" fxLayout="column" style="margin-top:50px">
+  <h2 fxFlexAlign="center">My current list of heroes</h2>
+  <div class="mat-elevation-z1 loading-bgcolor" fxFlexAlign="center" ngClass.gt-sm="margin-container">
     <mat-list-touch (swipeLeftAction)="listItemSwipeLeft($event)"
                     (swipeRightAction)="listItemSwipeRight($event)"
                     [dataSource]="listData.connect().value"
                     [separatorEval]="evaluateSeparatorRequired"
     >
-        <!-- Some more optional things-->
-        <!-- [disableActionsEval]="eventService.isEventLocked" -->
-        <!-- (tapAction)="eventService.tapEvent($event)" -->
-        <!-- [separatorEval]="eventService.isNewWeek" -->
-        <!-- [leftBorderEval]="eventService.statusToBorder" -->
-        <!-- [rightBorderEval]="eventService.statusToBorder" -->
+      <!-- Some more optional things-->
+      <!-- [disableActionsEval]="eventService.isEventLocked" -->
+      <!-- (tapAction)="eventService.tapEvent($event)" -->
+      <!-- [separatorEval]="eventService.isNewWeek" -->
+      <!-- [leftBorderEval]="eventService.statusToBorder" -->
+      <!-- [rightBorderEval]="eventService.statusToBorder" -->
 
-        <ng-template #separatorTemplate let-item>
+      <ng-template #separatorTemplate let-item>
             <span class="week-separator" fxFlexAlign="center">
                 {{item.start | date: '\'WEEK\' w'}}
             </span>
-            <mat-divider></mat-divider>
-        </ng-template>
+        <mat-divider></mat-divider>
+      </ng-template>
 
-        <ng-template #identityTemplate let-item>
-            <div fxLayout="column">
-                <small class="mat-caption application_blue date-tile-day" fxFlexAlign="auto">
-                    {{item.start | date: 'EEE'}}
-                </small>
-                <span class="date-tile-date" fxFlexAlign="stretch">
+      <ng-template #identityTemplate let-item>
+        <div fxLayout="column">
+          <small class="mat-caption application_blue date-tile-day" fxFlexAlign="auto">
+            {{item.start | date: 'EEE'}}
+          </small>
+          <span class="date-tile-date" fxFlexAlign="stretch">
                     {{item.start | date: 'dd'}}
                 </span>
-                <span class="date-tile-month" fxFlexAlign="stretch">
+          <span class="date-tile-month" fxFlexAlign="stretch">
                     {{item.start | date:'MMM'}}
                 </span>
-            </div>
-        </ng-template>
-        <ng-template #contentTemplate let-item>
-            <mat-icon class="icon-tile" ngClass.gt-sm="icon-tile-big">
-                {{item.icon ? item.icon : 'help_outline' }}
-            </mat-icon>
-            <div class="mat-list-text list-item-details" fxLayout="column"
-                 fxLayoutAlign="center begin">
-                <small class="text-ellipsis">
-                    <strong>{{item.name }}</strong>
-                </small>
-                <small class="text-ellipsis time-row">
-                    {{item.start | date:'HH:mm'}}-{{item.end | date:'HH:mm'}}
-                </small>
-                <small class="text-ellipsis" fxHide.lt-md>
-                    {{item.description}}
-                </small>
-            </div>
-            <mat-icon *ngIf="item.locked" class="icon-tile" ngClass.gt-sm="icon-tile-big">
-                lock
-            </mat-icon>
-        </ng-template>
+        </div>
+      </ng-template>
+      <ng-template #contentTemplate let-item>
+        <mat-icon class="icon-tile" ngClass.gt-sm="icon-tile-big">
+          {{item.icon ? item.icon : 'help_outline' }}
+        </mat-icon>
+        <div class="mat-list-text list-item-details" fxLayout="column"
+             fxLayoutAlign="center begin">
+          <small class="text-ellipsis">
+            <strong>{{item.name }}</strong>
+          </small>
+          <small class="text-ellipsis time-row">
+            {{item.start | date:'HH:mm'}}-{{item.end | date:'HH:mm'}}
+          </small>
+          <small class="text-ellipsis" fxHide.lt-md>
+            {{item.description}}
+          </small>
+        </div>
+        <mat-icon *ngIf="item.locked" class="icon-tile" ngClass.gt-sm="icon-tile-big">
+          lock
+        </mat-icon>
+      </ng-template>
     </mat-list-touch>
-</div>
+  </div>
+
+</section>

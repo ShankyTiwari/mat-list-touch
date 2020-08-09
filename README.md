@@ -1,21 +1,28 @@
 # mat-list-touch
 
-Template-based (Customizable) Material List with touch interaction for Angular Projects.
+This is a list module with touch events (swipe/tap) for Angular 10 projects, based on Angular's mat-list and mat-list-item.
 
 ## Why mat-list-touch?
-Found yourself having to recreate swipe interaction on angular material list components? 
-This module makes it quite easy to create such a list by importing it and defining the `mat-list-touch` component.
-  
+Found yourself having to recreate swipe interaction on an angular material list component? 
+This module makes it quite easy to do so!
 
-This module provides **Four** types of the listviews, so no need to write code for the listview again and again. With the help of this module, you can easily integrate list view having **Swipe to delete feature**. This module should work with all kind of screens width.
+This module provides different approaches as every list is different and every list has a different data source. With the help of this module, you can easily integrate any table data source (`MatTableDataSource` for you?) having **Swipe -> Action flow** or **Tap --> Action flow**. This module should work with all kind of screens widths, and is currently actively used in a cross-platform/PWA production setting (iOS/Andoird/Web).
+
+So, in summary, the module can:
+- Lock rows (prevent swipe/tap)
+- Swipe rows (different color/icon can be set)
+- Tap rows
+- Provide separators (above the element where the separator evaluation callback return non-falsy)
+
+We understand that the templates required in the component can be a bit confusing concerning styling. I foresee that is not 100% robust, so please provide a clear issue report in that case and we will take a look!
 
 ## Demo
 
 Try out the demo by cloning the project, installing with `npm install` and run it with `ng serve`.
 
-_Previous demo_
-Check the v1.0 Material Swipe to delete list in action, [click here](http://plugins.codershood.info/#/plugins/ngstd-plugin).
-(Not alike v2.0)
+The current demo of this library's predecessor **does not** represent this version (mat-list-touch is not compatible with ng-swipe-to-delete, as it was called previously). 
+Still want to take a look? Check the v1.0 Material Swipe to delete list in action, [click here](http://plugins.codershood.info/#/plugins/ngstd-plugin).
+(Again, not alike v2.0)
 
 ## Installation
 You can use either the npm or yarn command-line tool to install packages. Use whichever is appropriate for your project in the examples below.
@@ -33,7 +40,7 @@ yarn add --save mat-list-touch
 ## Usage
 Follow below steps to add multi level list in your project
 
-#### 1. Import NgSwipeToDeleteModule
+#### 1. Import MatListTouchModule
 
 You need to import the ```MatListTouchModule``` in the module of your app, where you want to use it.
 
@@ -58,6 +65,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
         BrowserAnimationsModule,
         MatDividerModule, // Advised as often handy in mat-list scenario's
         MatIconModule, // Advised as often handy in mat-list scenario's
+        MatSnackBarModule, // Optional, but very nice (Sheets/Dialogs are also an alternative)
         FlexLayoutModule
     ],
     providers: [
@@ -144,19 +152,31 @@ listData = new MatTableDataSource<ListItem>(
 * ``` silenceWarnings: boolean = false ``` (default: false) silence any warnings thrown
   
 ### Configuration (callback)
-* ``` separatorEval(index: number, value: any) ``` will fire to check whether a row will enable the child template `separatorTemplate`
-* ``` leftBorderEval(index: number, value: any) ``` will fire to let you evaluate the color of the item's LEFT border, if any.
-* ``` rightBorderEval(index: number, value: any) ``` will fire to let you evaluate the color of the item's RIGHT border, if any.
-* ``` disableActionsEval(index: number, value: any) ``` similarly lets you lock the row, if you want.
+* ``` separatorEval(data: any, index: number) ``` will fire to check whether a row will enable the child template `separatorTemplate`
+* ``` leftBorderEval(data: any, index: number) ``` will fire to let you evaluate the color of the item's LEFT border, if any.
+* ``` rightBorderEval(data: any, index: number) ``` will fire to let you evaluate the color of the item's RIGHT border, if any.
+* ``` disableActionsEval(data: any, index: number) ``` similarly lets you lock the row, if you want.
         
 ## Dependencies
 1. [Material Icons](https://material.io/tools/icons/?style=baseline)
 2. [Angular Material](https://material.angular.io)
 3. [HammerJs](https://hammerjs.github.io/)
 4. [Angular FlexLayout](https://github.com/angular/flex-layout)
+
+## Known problems
+- HammerJS is known to give a CommonJS bailout warning for Angular 10 when compiling. To suppress this warning add the following to your `angular.json`:
+> projects:project-name-here:architect:build:options:allowedCommonJsDependencies: { ..., "hammerjs", ...}
+
+or put differently, add `hammerjs` to `allowedCommonJsDependencies` for the `@angular-devkit/build-angular:browser` builder specification:
+```
+"allowedCommonJsDependencies": [
+    "hammerjs"
+],
+```
+
 ## Contribution
 
-I welcome you to fork and add more features into it. If you have any bugs or feature request, please create an issue at [github repository](https://github.com/ShankyTiwari/ng-swipe-to-delete/issues).
+I welcome you to fork and add more features into it. If you have any bugs or a feature request, please create an issue at [github repository](https://github.com/ShankyTiwari/ng-swipe-to-delete/issues).
 
 ## License
 

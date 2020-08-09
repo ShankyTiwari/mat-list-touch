@@ -2,6 +2,10 @@
 
 This is a list module with touch events (swipe/tap) for Angular 10 projects, based on Angular's mat-list and mat-list-item.
 
+See how we use it in production below:
+
+![70910861-e8788700-2010-11ea-924f-a37767b83ea7](https://user-images.githubusercontent.com/6005355/89727658-0c1c9180-da27-11ea-90ac-aa8d9b77b3b7.png)
+
 ## Why mat-list-touch?
 Found yourself having to recreate swipe interaction on an angular material list component? 
 This module makes it quite easy to do so!

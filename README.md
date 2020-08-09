@@ -152,19 +152,31 @@ listData = new MatTableDataSource<ListItem>(
 * ``` silenceWarnings: boolean = false ``` (default: false) silence any warnings thrown
   
 ### Configuration (callback)
-* ``` separatorEval(index: number, value: any) ``` will fire to check whether a row will enable the child template `separatorTemplate`
-* ``` leftBorderEval(index: number, value: any) ``` will fire to let you evaluate the color of the item's LEFT border, if any.
-* ``` rightBorderEval(index: number, value: any) ``` will fire to let you evaluate the color of the item's RIGHT border, if any.
-* ``` disableActionsEval(index: number, value: any) ``` similarly lets you lock the row, if you want.
+* ``` separatorEval(data: any, index: number) ``` will fire to check whether a row will enable the child template `separatorTemplate`
+* ``` leftBorderEval(data: any, index: number) ``` will fire to let you evaluate the color of the item's LEFT border, if any.
+* ``` rightBorderEval(data: any, index: number) ``` will fire to let you evaluate the color of the item's RIGHT border, if any.
+* ``` disableActionsEval(data: any, index: number) ``` similarly lets you lock the row, if you want.
         
 ## Dependencies
 1. [Material Icons](https://material.io/tools/icons/?style=baseline)
 2. [Angular Material](https://material.angular.io)
 3. [HammerJs](https://hammerjs.github.io/)
 4. [Angular FlexLayout](https://github.com/angular/flex-layout)
+
+## Known problems
+- HammerJS is known to give a CommonJS bailout warning for Angular 10 when compiling. To suppress this warning add the following to your `angular.json`:
+> projects:project-name-here:architect:build:options:allowedCommonJsDependencies: { ..., "hammerjs", ...}
+
+or put differently, add `hammerjs` to `allowedCommonJsDependencies` for the `@angular-devkit/build-angular:browser` builder specification:
+```
+"allowedCommonJsDependencies": [
+    "hammerjs"
+],
+```
+
 ## Contribution
 
-I welcome you to fork and add more features into it. If you have any bugs or feature request, please create an issue at [github repository](https://github.com/ShankyTiwari/ng-swipe-to-delete/issues).
+I welcome you to fork and add more features into it. If you have any bugs or a feature request, please create an issue at [github repository](https://github.com/ShankyTiwari/ng-swipe-to-delete/issues).
 
 ## License
 

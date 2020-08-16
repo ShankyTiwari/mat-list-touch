@@ -22,11 +22,7 @@ We understand that the templates required in the component can be a bit confusin
 
 ## Demo
 
-Try out the demo by cloning the project, installing with `npm install` and run it with `ng serve`.
-
-The current demo of this library's predecessor **does not** represent this version (mat-list-touch is not compatible with ng-swipe-to-delete, as it was called previously). 
-Still want to take a look? Check the v1.0 Material Swipe to delete list in action, [click here](http://plugins.codershood.info/#/plugins/ngstd-plugin).
-(Again, not alike v2.0)
+Check the mat-list-touch in action, [click here](https://stackblitz.com/github/ShankyTiwari/mat-list-touch-example).
 
 ## Installation
 You can use either the npm or yarn command-line tool to install packages. Use whichever is appropriate for your project in the examples below.
